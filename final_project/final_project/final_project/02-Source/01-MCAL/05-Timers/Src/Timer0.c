@@ -75,7 +75,7 @@ void Delay(u16 delay_number){
 		no_of_ovf =loc_delay_time/ovf;
 		rem=	fmod((loc_delay_time/ovf)*100,100);
 
-	TCCR0_REG = 4; /* Timer0, normal mode, /1024 prescalar */
+	TCCR0_REG|= 5; /* Timer0, normal mode, /1024 prescalar */
 		TCNT0_REG = rem;
 		while(tot_overflow<no_of_ovf)
 		{/* Load TCNT0, count for 10ms */
@@ -96,6 +96,43 @@ void Timer0_INT_Callout(void(*ptr)(void))
 }
 */
 
+
+
+void Timer0_FPWM_Int(){
+	// choose the mode of fpwm in timer0
+	
+	SIT_BIT(TCCR0_REG,6);
+	SIT_BIT(TCCR0_REG,3);
+	  // to choose mode of non inverting in fpwm
+	 CLEAR_BIT(TCCR0_REG,4);
+	 SIT_BIT(TCCR0_REG,5);
+	 
+	GLB_ON();
+	
+	SIT_BIT(TIMSK_REG,0); 
+	// make pin 3 in portB as output to make pwm out from this pin
+		SIT_BIT(DDRB,3);
+}
+
+
+void Timer0_FPWM_Start(){
+	// to start the timer prescaler 256
+	TCCR0_REG|= 4;
+}
+
+
+
+void Timer0_Set_Duty(u8 duty_cycle){
+	OCR0_REG=((duty_cycle*256)/100)-1;
+}
+
+void Timer0_FPWM_Stop(){
+	// to stop the timer
+	
+	CLEAR_BIT(TCCR0_REG,0);
+	CLEAR_BIT(TCCR0_REG,1);
+	CLEAR_BIT(TCCR0_REG,2);
+}
 
 
 ISR(TIMER0_OVF_vect)

@@ -49,6 +49,7 @@ SUBDIRS :=  \
 ../02-Source/01-MCAL/05-Timers \
 ../02-Source/01-MCAL/05-Timers/Inc \
 ../02-Source/01-MCAL/05-Timers/Src \
+../02-Source/01-MCAL/WDT \
 ../02-Source/02-HAL \
 ../02-Source/02-HAL/01-LED \
 ../02-Source/02-HAL/01-LED/Inc \
@@ -56,6 +57,8 @@ SUBDIRS :=  \
 ../02-Source/02-HAL/02-BUTTON \
 ../02-Source/02-HAL/02-BUTTON/Inc \
 ../02-Source/02-HAL/02-BUTTON/Src \
+../02-Source/02-HAL/DC_Motor \
+../02-Source/02-HAL/Srevo_Motor \
 ../02-Source/04-App
 
 
@@ -65,8 +68,12 @@ C_SRCS +=  \
 ../02-Source/01-MCAL/03-GINT/Src/GLBINT.c \
 ../02-Source/01-MCAL/04-EXT_INT/Src/EXT_INT.c \
 ../02-Source/01-MCAL/05-Timers/Src/Timer0.c \
+../02-Source/01-MCAL/05-Timers/Src/Timer1.c \
+../02-Source/01-MCAL/WDT/WDT.c \
 ../02-Source/02-HAL/01-LED/Src/Led.c \
 ../02-Source/02-HAL/02-BUTTON/Src/Button.c \
+../02-Source/02-HAL/DC_Motor/DC_Motor.c \
+../02-Source/02-HAL/Srevo_Motor/Servo_Motor.c \
 ../02-Source/04-App/main.c
 
 
@@ -81,8 +88,12 @@ OBJS +=  \
 02-Source/01-MCAL/03-GINT/Src/GLBINT.o \
 02-Source/01-MCAL/04-EXT_INT/Src/EXT_INT.o \
 02-Source/01-MCAL/05-Timers/Src/Timer0.o \
+02-Source/01-MCAL/05-Timers/Src/Timer1.o \
+02-Source/01-MCAL/WDT/WDT.o \
 02-Source/02-HAL/01-LED/Src/Led.o \
 02-Source/02-HAL/02-BUTTON/Src/Button.o \
+02-Source/02-HAL/DC_Motor/DC_Motor.o \
+02-Source/02-HAL/Srevo_Motor/Servo_Motor.o \
 02-Source/04-App/main.o
 
 OBJS_AS_ARGS +=  \
@@ -90,8 +101,12 @@ OBJS_AS_ARGS +=  \
 02-Source/01-MCAL/03-GINT/Src/GLBINT.o \
 02-Source/01-MCAL/04-EXT_INT/Src/EXT_INT.o \
 02-Source/01-MCAL/05-Timers/Src/Timer0.o \
+02-Source/01-MCAL/05-Timers/Src/Timer1.o \
+02-Source/01-MCAL/WDT/WDT.o \
 02-Source/02-HAL/01-LED/Src/Led.o \
 02-Source/02-HAL/02-BUTTON/Src/Button.o \
+02-Source/02-HAL/DC_Motor/DC_Motor.o \
+02-Source/02-HAL/Srevo_Motor/Servo_Motor.o \
 02-Source/04-App/main.o
 
 C_DEPS +=  \
@@ -99,8 +114,12 @@ C_DEPS +=  \
 02-Source/01-MCAL/03-GINT/Src/GLBINT.d \
 02-Source/01-MCAL/04-EXT_INT/Src/EXT_INT.d \
 02-Source/01-MCAL/05-Timers/Src/Timer0.d \
+02-Source/01-MCAL/05-Timers/Src/Timer1.d \
+02-Source/01-MCAL/WDT/WDT.d \
 02-Source/02-HAL/01-LED/Src/Led.d \
 02-Source/02-HAL/02-BUTTON/Src/Button.d \
+02-Source/02-HAL/DC_Motor/DC_Motor.d \
+02-Source/02-HAL/Srevo_Motor/Servo_Motor.d \
 02-Source/04-App/main.d
 
 C_DEPS_AS_ARGS +=  \
@@ -108,8 +127,12 @@ C_DEPS_AS_ARGS +=  \
 02-Source/01-MCAL/03-GINT/Src/GLBINT.d \
 02-Source/01-MCAL/04-EXT_INT/Src/EXT_INT.d \
 02-Source/01-MCAL/05-Timers/Src/Timer0.d \
+02-Source/01-MCAL/05-Timers/Src/Timer1.d \
+02-Source/01-MCAL/WDT/WDT.d \
 02-Source/02-HAL/01-LED/Src/Led.d \
 02-Source/02-HAL/02-BUTTON/Src/Button.d \
+02-Source/02-HAL/DC_Motor/DC_Motor.d \
+02-Source/02-HAL/Srevo_Motor/Servo_Motor.d \
 02-Source/04-App/main.d
 
 OUTPUT_FILE_PATH +=final_project.elf
@@ -129,49 +152,77 @@ LINKER_SCRIPT_DEP+=
 02-Source/01-MCAL/01-DIO/Src/Dio.o: ../02-Source/01-MCAL/01-DIO/Src/Dio.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 02-Source/01-MCAL/03-GINT/Src/GLBINT.o: ../02-Source/01-MCAL/03-GINT/Src/GLBINT.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 02-Source/01-MCAL/04-EXT_INT/Src/EXT_INT.o: ../02-Source/01-MCAL/04-EXT_INT/Src/EXT_INT.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 02-Source/01-MCAL/05-Timers/Src/Timer0.o: ../02-Source/01-MCAL/05-Timers/Src/Timer0.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+02-Source/01-MCAL/05-Timers/Src/Timer1.o: ../02-Source/01-MCAL/05-Timers/Src/Timer1.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+02-Source/01-MCAL/WDT/WDT.o: ../02-Source/01-MCAL/WDT/WDT.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 02-Source/02-HAL/01-LED/Src/Led.o: ../02-Source/02-HAL/01-LED/Src/Led.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 02-Source/02-HAL/02-BUTTON/Src/Button.o: ../02-Source/02-HAL/02-BUTTON/Src/Button.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+02-Source/02-HAL/DC_Motor/DC_Motor.o: ../02-Source/02-HAL/DC_Motor/DC_Motor.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+02-Source/02-HAL/Srevo_Motor/Servo_Motor.o: ../02-Source/02-HAL/Srevo_Motor/Servo_Motor.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 02-Source/04-App/main.o: ../02-Source/04-App/main.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)E:\microship\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../02-Source/00-Library" -I"../02-Source/01-MCAL/01-DIO/Inc" -I"../02-Source/01-MCAL/03-GINT/Inc" -I"../02-Source/01-MCAL/04-EXT_INT/Inc" -I"../02-Source/01-MCAL/05-Timers/Inc" -I"../02-Source/02-HAL/01-LED/Inc" -I"../02-Source/02-HAL/02-BUTTON/Inc" -I"../02-Source/02-HAL/DC_Motor" -I"../02-Source/02-HAL/Srevo_Motor" -I"../02-Source/01-MCAL/WDT"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "E:\microship\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
